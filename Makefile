@@ -62,7 +62,7 @@ INC       := $(INC) $(GMPINC)
 # use the second line to disable profiling instrumentation
 # PROFILING := -pg
 PROFILING :=
-CCFLAGS   := -Wall $(INC) $(CONFIG) -O2 -DNDEBUG $(PROFILING)
+CCFLAGS   := -fPIC -Wall $(INC) $(CONFIG) -O2 -DNDEBUG $(PROFILING)
 CXXFLAGS  := $(CCFLAGS) $(CPP11_FLAGS)
 CCDFLAGS  := -Wall $(INC) $(CONFIG) -ggdb
 CXXDFLAGS := $(CCDFLAGS)
@@ -72,8 +72,8 @@ GMPLD     := -L$(GMP_LIB_DIR) -lgmpxx -lgmp
 # static version...
 #GMPLD     := $(GMP_LIB_DIR)/libgmpxx.a $(GMP_LIB_DIR)/libgmp.a
 
-LINK         := $(CXXFLAGS) $(GMPLD)
-LINKD        := $(CXXDFLAGS) $(GMPLD)
+LINK         := $(CXXFLAGS) $(GMPLD) -fPIC
+LINKD        := $(CXXDFLAGS) $(GMPLD) -fPIC
 ifeq ($(PLATFORM),Darwin)
   LINK  := $(LINK) -Wl,-no_pie
   LINKD := $(LINK) -Wl,-no_pie
@@ -168,12 +168,17 @@ LIB_TARGET_NAME   := cork
 # | Target Rules |
 # +--------------+
 all: lib/lib$(LIB_TARGET_NAME).a includes \
+	 lib/lib$(LIB_TARGET_NAME).so \
      bin/off2obj bin/cork
 debug: lib/lib$(LIB_TARGET_NAME)debug.a includes
 
 lib/lib$(LIB_TARGET_NAME).a: $(OBJ)
 	@echo "Bundling $@"
 	@ar rcs $@ $(OBJ)
+
+lib/lib$(LIB_TARGET_NAME).so: $(OBJ)
+	@echo "Bundling $@"
+	@$(CXX) -v -shared -fPIC -o lib/lib$(LIB_TARGET_NAME).so $(OBJ) $(LINK)
 
 lib/lib$(LIB_TARGET_NAME)debug.a: $(DEBUG)
 	@echo "Bundling $@"
