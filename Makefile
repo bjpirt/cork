@@ -91,7 +91,7 @@ ISCT_SRCS    := empty3d quantization
 MESH_SRCS    := 
 RAWMESH_SRCS := 
 ACCEL_SRCS   := 
-FILE_SRCS    := files ifs off
+FILE_SRCS    := files ifs off stl
 SRCS         := \
     cork \
     $(addprefix math/,$(MATH_SRCS))\
