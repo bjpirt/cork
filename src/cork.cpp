@@ -221,6 +221,18 @@ void computeDifference(
     corkMesh2CorkTriMesh(&cmIn0, out);
 }
 
+void computeCutDifference(
+    CorkTriMesh in0, CorkTriMesh in1, CorkTriMesh *out
+) {
+    CorkMesh cmIn0, cmIn1;
+    corkTriMesh2CorkMesh(in0, &cmIn0);
+    corkTriMesh2CorkMesh(in1, &cmIn1);
+    
+    cmIn0.boolCutDiff(cmIn1);
+    
+    corkMesh2CorkTriMesh(&cmIn0, out);
+}
+
 void computeIntersection(
     CorkTriMesh in0, CorkTriMesh in1, CorkTriMesh *out
 ) {
@@ -229,6 +241,18 @@ void computeIntersection(
     corkTriMesh2CorkMesh(in1, &cmIn1);
     
     cmIn0.boolIsct(cmIn1);
+    
+    corkMesh2CorkTriMesh(&cmIn0, out);
+}
+
+void computeCutIntersection(
+    CorkTriMesh in0, CorkTriMesh in1, CorkTriMesh *out
+) {
+    CorkMesh cmIn0, cmIn1;
+    corkTriMesh2CorkMesh(in0, &cmIn0);
+    corkTriMesh2CorkMesh(in1, &cmIn1);
+    
+    cmIn0.boolCutIsct(cmIn1);
     
     corkMesh2CorkTriMesh(&cmIn0, out);
 }

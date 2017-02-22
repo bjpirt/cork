@@ -59,8 +59,14 @@ void computeUnion(CorkTriMesh in0, CorkTriMesh in1, CorkTriMesh *out);
 // result = A - B
 void computeDifference(CorkTriMesh in0, CorkTriMesh in1, CorkTriMesh *out);
 
+// result = A - B but don't include any geometry from B
+void computeCutDifference(CorkTriMesh in0, CorkTriMesh in1, CorkTriMesh *out);
+
 // result = A ^ B
 void computeIntersection(CorkTriMesh in0, CorkTriMesh in1, CorkTriMesh *out);
+
+// result = A ^ B but don't include any geometry from B
+void computeCutIntersection(CorkTriMesh in0, CorkTriMesh in1, CorkTriMesh *out);
 
 // result = A XOR B
 void computeSymmetricDifference(
