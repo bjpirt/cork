@@ -210,7 +210,9 @@ public: // BOOLean operation module
     //      this = this OP rhs
     void boolUnion(Mesh &rhs);
     void boolDiff(Mesh &rhs);
+    void boolCutDiff(Mesh &rhs);
     void boolIsct(Mesh &rhs);
+    void boolCutIsct(Mesh &rhs);
     void boolXor(Mesh &rhs);
     
 private:    // Internal Formats

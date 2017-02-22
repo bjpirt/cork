@@ -304,10 +304,20 @@ int main(int argc, char *argv[])
     "-diff in0 in1 out      Compute the Boolean difference of in0 and in1,\n"
     "                       and output the result",
     genericBinaryOp(computeDifference));
+    cmds.regCmd("cutdiff",
+    "-cutdiff in0 in1 out   Compute the Boolean difference of in0 and in1,\n"
+    "                       and don't include any geomertry from in1,\n"
+    "                       and output the result",
+    genericBinaryOp(computeCutDifference));
     cmds.regCmd("isct",
     "-isct in0 in1 out      Compute the Boolean intersection of in0 and in1,\n"
     "                       and output the result",
     genericBinaryOp(computeIntersection));
+    cmds.regCmd("cutisct",
+    "-cutisct in0 in1 out   Compute the Boolean intersection of in0 and in1,\n"
+    "                       and don't include any geomertry from in1,\n"
+    "                       and output the result",
+    genericBinaryOp(computeCutIntersection));
     cmds.regCmd("xor",
     "-xor in0 in1 out       Compute the Boolean XOR of in0 and in1,\n"
     "                       and output the result\n"

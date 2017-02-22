@@ -74,8 +74,14 @@ CORKLIBRARY_API void computeUnion(CorkTriMesh in0, CorkTriMesh in1, CorkTriMesh 
 // result = A - B
 CORKLIBRARY_API void computeDifference(CorkTriMesh in0, CorkTriMesh in1, CorkTriMesh *out);
 
+// result = A - B but don't include any geometry from B
+CORKLIBRARY_API void computeCutDifference(CorkTriMesh in0, CorkTriMesh in1, CorkTriMesh *out);
+
 // result = A ^ B
 CORKLIBRARY_API void computeIntersection(CorkTriMesh in0, CorkTriMesh in1, CorkTriMesh *out);
+
+// result = A ^ B but don't include any geometry from B
+CORKLIBRARY_API void computeCutIntersection(CorkTriMesh in0, CorkTriMesh in1, CorkTriMesh *out);
 
 // result = A XOR B
 CORKLIBRARY_API void computeSymmetricDifference(CorkTriMesh in0, CorkTriMesh in1, CorkTriMesh *out);
