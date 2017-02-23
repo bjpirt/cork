@@ -309,6 +309,7 @@ void rotate180Y(CorkTriMesh& in0)
 	}
 }
 
+#if 0
 extern bool loadMesh(std::string filename, CorkTriMesh& out);
 extern void saveMesh(std::string filename, CorkTriMesh in);
 
@@ -482,3 +483,5 @@ namespace CorkCommander {
 	}
 
 }
+
+#endif
