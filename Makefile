@@ -19,6 +19,8 @@ SHELL_HACK := $(shell mkdir -p $(addprefix depend/,$(SUBDIRECTORIES)))
 # also make a directory to expose headers in
 #SHELL_HACK := $(shell mkdir -p $(addprefix include/,$(SUBDIRECTORIES)))
 
+INSTALL ?= install -m 755
+
 # +----------+
 # | Platform |
 # +----------+-------------------
@@ -79,6 +81,7 @@ ifeq ($(PLATFORM),Darwin)
   LINKD := $(LINK) -Wl,-no_pie
 endif
 
+INSTALL_DIR := /usr/local/bin
 
 # ***********************
 # * SOURCE DECLARATIONS *
@@ -232,14 +235,17 @@ include/%.tpp: src/%.tpp
 	@echo "updating $@"
 	@cp $< $@
 
+install: bin/cork
+	$(INSTALL) bin/cork $(INSTALL_DIR)/cork
+
 # +---------------+
 # | cleaning rule |
 # +---------------+
 clean:
-	-@$(RM) -r obj depend debug include bin lib
-	-@$(RM) bin/off2obj
+	-@$(RM) -rf obj depend debug include bin lib
+	-@$(RM) -rf bin/off2obj
 #	-@$(RM) gmon.out
-	-@$(RM) lib/lib$(LIB_TARGET_NAME).a
-	-@$(RM) lib/lib$(LIB_TARGET_NAME)debug.a
+	-@$(RM) -rf lib/lib$(LIB_TARGET_NAME).a
+	-@$(RM) -rf lib/lib$(LIB_TARGET_NAME)debug.a
 
 -include $(DEPENDS)
